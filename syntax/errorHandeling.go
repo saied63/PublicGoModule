@@ -29,12 +29,12 @@ func OpenThisFile(path string) (*os.File, error) {
 	}
 }
 
-func OpenAndShowFile(path string) error {
-	_, err := os.OpenFile(path, os.O_RDONLY, 14)
+func OpenAndShowFile(path string) (*os.File, error) {
+	file, err := os.OpenFile(path, os.O_RDWR, 0644)
 	if err != nil {
-		return err
+		return nil, err
 	} else {
 
-		return nil
+		return file, nil
 	}
 }
