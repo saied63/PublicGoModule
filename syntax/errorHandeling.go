@@ -28,3 +28,13 @@ func OpenThisFile(path string) (*os.File, error) {
 		return file, nil
 	}
 }
+
+func OpenAndShowFile(path string) error {
+	_, err := os.OpenFile(path, os.O_RDONLY, 14)
+	if err != nil {
+		return err
+	} else {
+
+		return nil
+	}
+}
