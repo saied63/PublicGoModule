@@ -24,7 +24,7 @@ func OpenThisFile(path string) (*os.File, error) {
 	if err != nil {
 		return nil, err
 	} else {
-
+		defer file.Close()
 		return file, nil
 	}
 }
@@ -34,7 +34,7 @@ func OpenAndShowFile(path string) (*os.File, error) {
 	if err != nil {
 		return nil, err
 	} else {
-
+		defer file.Close()
 		return file, nil
 	}
 }
