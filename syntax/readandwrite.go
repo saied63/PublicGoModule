@@ -31,6 +31,7 @@ func OpenThisFile(path string) (*os.File, error) {
 }
 
 func AddStringToFile(path string, writeTxt string, seek [2]int64) (*os.File, error) {
+	defer CallThisafterAll()
 	var err error
 	var file *os.File
 	file, err = os.OpenFile(path, os.O_RDWR, 0644)
