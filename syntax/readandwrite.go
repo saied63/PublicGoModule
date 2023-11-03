@@ -16,6 +16,7 @@ type error interface{
 */
 
 import (
+	"fmt"
 	"os"
 )
 
@@ -29,12 +30,33 @@ func OpenThisFile(path string) (*os.File, error) {
 	}
 }
 
-func OpenAndShowFile(path string) (*os.File, error) {
-	file, err := os.OpenFile(path, os.O_RDWR, 0644)
+func AddStringToFile(path string, writeTxt string, seek [2]int64) (*os.File, error) {
+	var err error
+	var file *os.File
+	file, err = os.OpenFile(path, os.O_RDWR, 0644)
 	if err != nil {
 		return nil, err
 	} else {
 		defer file.Close()
-		return file, nil
+		_, err = file.Seek(seek[0], int(seek[1]))
+		data := make([]byte, 128)
+		if err != nil {
+			return nil, err
+		} else {
+			_, err = file.Read(data)
+			if err != nil {
+				return nil, err
+			} else {
+				addBytes := []byte(writeTxt)
+				data = append(data, addBytes...)
+				err = os.WriteFile(path, data, 0644)
+				if err != nil {
+					return nil, err
+				} else {
+					fmt.Println("Data Read from file is  : \n", string(data))
+					return file, nil
+				}
+			}
+		}
 	}
 }
