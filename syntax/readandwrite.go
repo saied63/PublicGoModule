@@ -54,6 +54,9 @@ func AddStringToFile(path string, writeTxt string, seek [2]int64) (*os.File, err
 					return nil, err
 				} else {
 					fmt.Println("Data Read from file is  : \n", string(data))
+					if err = file.Sync(); err != nil {
+						return nil, err
+					}
 					return file, nil
 				}
 			}
