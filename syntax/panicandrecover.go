@@ -1,4 +1,4 @@
-package main
+package syntax
 
 func TestPanic(a int) {
 	if a == 0 {
