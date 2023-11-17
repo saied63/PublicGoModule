@@ -2,6 +2,7 @@ package syntax
 
 import (
 	"fmt"
+	"runtime"
 	"time"
 )
 
@@ -20,11 +21,21 @@ func callGoRoutine1() {
 }
 
 func CreateMultipleGoRoutine() {
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 5; i++ {
 		go execute(i)
 	}
 }
 
 func execute(a int) {
 	fmt.Println(a)
+}
+
+func PrintNumberOfVirtualCpusTHreads() {
+	fmt.Println("/************** total virtual threads is : ")
+	fmt.Println(runtime.NumCPU())
+	fmt.Println("**************/")
+	// call an anymous function
+	go func() {
+		fmt.Println("anumous func .... ")
+	}()
 }
